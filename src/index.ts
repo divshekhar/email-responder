@@ -13,13 +13,7 @@ const filePath = `${homedir}/auto-respond/cred.json`;
 const eventEmitter = new EventEmitter();
 const datastore = new DataStore(filePath);
 
-// register event
-/**
- * can be improved to deal with multiple email accounts
- * by putting the event listener in a loop and the emitted
- * event should pass email as argument for identification
- * basically spawninng multiple service for each account
- */
+// register event listener
 eventEmitter.on(`start_autoreply_service`, () => {
   const data = datastore.getData();
   // core logic
@@ -30,7 +24,7 @@ eventEmitter.on(`start_autoreply_service`, () => {
   });
 });
 
-app.get("/logout", async (req, res) => {
+app.get("/logout", async (_, res) => {
   const data = datastore.getData();
 
   if (data.length === 0) {
@@ -69,12 +63,6 @@ app.get("/google/callback", async (req, res) => {
     refreshToken: tokens.refresh_token,
   });
 
-  /**
-   * can be improved to deal with multiple email accounts
-   * by putting the event listener in a loop and the emitted
-   * event should pass email as argument for identification
-   * ex: eventEmitter.emit(`start_autoreply_service`,mailboxDetails.email);
-   */
   console.log("Logged in!");
   eventEmitter.emit(`start_autoreply_service`);
 

@@ -106,10 +106,7 @@ export const getUserEmailThreads = async (refreshToken: string) => {
   return res.data.threads || [];
 };
 
-export const GetThreadDetails = async (
-  threadId: string,
-  refreshToken: string
-) => {
+export const GetThreadDetails = async (threadId: string, refreshToken: string) => {
   oauth2Client.setCredentials({ refresh_token: refreshToken });
 
   const threadRes = await gmailClient.users.threads.get({
@@ -121,15 +118,11 @@ export const GetThreadDetails = async (
   return threadRes.data;
 };
 
-export const CheckPriorResponse = (
-  thread: gmail_v1.Schema$Thread,
-  emailId: string
-) => {
+export const CheckPriorResponse = (thread: gmail_v1.Schema$Thread, emailId: string) => {
   return thread.messages?.some((message) =>
     message.payload?.headers?.some(
       (header) =>
-        header.name?.toLowerCase() === "from" &&
-        header.value?.toLowerCase().includes(emailId)
+        header.name?.toLowerCase() === "from" && header.value?.toLowerCase().includes(emailId)
     )
   );
 };
@@ -155,9 +148,6 @@ export const SendReplyToThread = async (
   thread: gmail_v1.Schema$Thread,
   refreshToken: string
 ) => {
-  /**
-   * could be handled in a better way
-   */
   if (!thread.messages) {
     console.log("Empty thread provided");
     return;

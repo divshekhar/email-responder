@@ -1,7 +1,7 @@
 {
-  "name": "auto-respond-gmail",
+  "name": "email-responder",
   "version": "1.0.0",
-  "description": "",
+  "description": "Automatic Gmail Responder",
   "main": "index.ts",
   "scripts": {
     "build": "tsc",
@@ -9,7 +9,7 @@
     "dev": "nodemon ./src/index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Divyanshu Shekhar",
   "license": "ISC",
   "dependencies": {
     "@googleapis/gmail": "^2.0.1",
